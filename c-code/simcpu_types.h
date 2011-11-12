@@ -27,18 +27,19 @@ typedef struct {
     uint8_t data [256];
 } Memory;
 
-
 /**
- * Sets the zero bit if necessary.
+ * Checks the result and sets the flags (carry, zero, negation) appropriate.
  */
-void zero_bit_check(CpuStatus* cpu_status) {
+void set_flags_by_result(CpuStatus* cpu_status, uint16_t result) {
 
-    if (cpu_status->accu == 0) { 
+    if (result == 0) { 
         cpu_status->zero_bit = 1; 
     }
     else { 
         cpu_status->zero_bit = 0; 
     }
+    cpu_status->carry_bit = (result & 0xff00) >> 8;
+    cpu_status->negation_bit = (result & 0x0080) >> 7;
 }
 
 /**
@@ -54,8 +55,8 @@ void nop() {}
 void load_value(CpuStatus* cpu_status, uint8_t value) {
     
     cpu_status->accu = value;
-    zero_bit_check(cpu_status);
-}t
+    set_flags_by_result(cpu_status, value);
+}
 
 /*
  * Loads the accumulator with the value contained at the specified memory address.
@@ -66,7 +67,7 @@ void load_value(CpuStatus* cpu_status, uint8_t value) {
 void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
     
     cpu_status->accu = data_segment[address];
-    zero_bit_check(cpu_status);
+    set_flags_by_result(cpu_status, data_segment[address]);
 }
 
 /*
@@ -78,6 +79,7 @@ void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t
 void store_value(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
     
     data_segemnt[address] = cpu_status->accu;
+    set_flags_by_result(cpu_status, cpu_status
 }
 
 /**
@@ -87,7 +89,10 @@ void store_value(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) 
  */
 void add_value(CpuStatus* cpu_status, uint8_t value) {
     
-    
+    uint16_t result = cpu_status->accu;
+    result += value; 
+    set_flags_by_result(cpu_status, result);
+    cpu_status->accu = (uint8_t) result;
 }
 
 /**
