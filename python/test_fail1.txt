@@ -1,0 +1,13 @@
+NOP
+LDA #256
+LDA (22)
+STA 22
+ADD #2
+ADD (2)
+SUB #2
+SUB (22)
+JMP 20
+BRZ #2
+BRC #3
+BRN #4
+END
