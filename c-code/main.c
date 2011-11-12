@@ -15,7 +15,7 @@ int main (int argc, const char * argv[])
 	uint16_t sample = 0;
 	int intline = 0;
 
-	struct Memory memory;
+	Memory memory;
 
 	if (argc < 2)
 	{
@@ -66,7 +66,7 @@ int main (int argc, const char * argv[])
 		printf("Inputfile is not closed correctly!\n");
 	}
 
-	printMemoryUntil(&memory, 64);
+	printMemoryUntil(&memory, 5);
 
 
 	return 0;
