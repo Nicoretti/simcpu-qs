@@ -21,16 +21,25 @@ struct TextSegment {
     uint8_t param;
 };
 
-struct DataSegment {
-
-    uint8_t value;
-};
-
 struct Memory {
 
     struct TextSegment text[256];
-    struct DataSegment data[256];
+    uint8_t data [256];
 };
+
+
+/**
+ * Sets the zero bit if necessary.
+ */
+void zero_bit_check(struct CpuStatus* cpu_status) {
+
+    if (cpu_status->accu == 0) { 
+        cpu_status->zero_bit = 1; 
+    }
+    else { 
+        cpu_status->zero_bit = 0; 
+    }
+}
 
 /**
  * As expected nop = no operation => it does nothing.
@@ -44,6 +53,8 @@ void nop() {}
  */
 void load_value(struct CpuStatus* cpu_status, uint8_t value) {
     
+    cpu_status->accu = value;
+    zero_bit_check(cpu_status);
 }
 
 /*
@@ -52,7 +63,7 @@ void load_value(struct CpuStatus* cpu_status, uint8_t value) {
  * @param data_segemnt:
  * @param address: where the value can be found.
  */
-void load_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+void load_value_by_address(struct CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
 
 }
 
@@ -62,7 +73,7 @@ void load_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* dat
  * @param data_segemnt:
  * @param address: where the value shall be stored.
  */
-void store_value(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+void store_value(struct CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
 
 }
 
@@ -82,7 +93,7 @@ void add_value(struct CpuStatus* cpu_status, uint8_t value) {
  * @param data_segemnt:
  * @param address: where the value can be found which will be added to the accumulator.
  */
-void add_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+void add_value_by_address(struct CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
 
 }
 
@@ -101,7 +112,7 @@ void sub_value(struct CpuStatus* cpu_status, uint8_t value) {
  * @param data_segemnt:
  * @param address: where the value can be found which will be subtracted from the accumulator.
  */
-void sub_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+void sub_value_by_address(struct CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
 
 }
 
