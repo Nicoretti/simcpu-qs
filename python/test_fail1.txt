@@ -1,5 +1,5 @@
 NOP
-LDA #256
+LDA #s256
 LDA (22)
 STA 22
 ADD #2
