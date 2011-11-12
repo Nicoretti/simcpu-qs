@@ -53,7 +53,7 @@ int main (int argc, const char * argv[])
 			sample = (uint16_t) intline;
 			opcode = (sample & 0xFF00) >> 8;
 			value = sample & 0x00FF;
-			printf("Opcode %d; Value %d\n", opcode, value);
+			//printf("Opcode %d; Value %d\n", opcode, value);
 			memory.text[i].opcode = opcode;
 			memory.text[i].param = value;
 	}
