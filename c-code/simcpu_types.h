@@ -22,7 +22,7 @@ typedef struct {
 
     uint8_t opcode;
     uint8_t param;
-} TextSegment ;
+} TextSegment;
 
 typedef struct {
 
@@ -36,10 +36,9 @@ typedef struct {
 extern void printMemoryUntil(Memory *memory, int value);
 
 /**
- * Sets the zero bit if necessary.
+ * Checks the result and sets the flags (carry, zero, negation) appropriate.
  */
-extern void zero_bit_check(CpuStatus* cpu_status); 
-
+extern void set_flags_by_result(CpuStatus* cpu_status, uint16_t result);
 
 /**
  * As expected nop = no operation => it does nothing.
@@ -52,6 +51,7 @@ extern void nop();
  * @param value: which will be loaded into the accumulator. 
  */
 extern void load_value(CpuStatus* cpu_status, uint8_t value); 
+
 
 /*
  * Loads the accumulator with the value contained at the specified memory address.
@@ -68,8 +68,8 @@ extern void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, 
  * @param data_segemnt:
  * @param address: where the value shall be stored.
  */
+<<<<<<< local
 extern void store_value(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address);
-
 
 /**
  * Increases the value of the accumulator by the specified value. 
@@ -77,7 +77,7 @@ extern void store_value(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t ad
  * @param value: which will be added to the accumulator.
  */
 extern void add_value(CpuStatus* cpu_status, uint8_t value);
-    
+
 
 /**
  * Increases the value of the the accumulator by the value at the given memory address

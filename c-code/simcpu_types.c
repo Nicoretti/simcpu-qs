@@ -3,6 +3,7 @@
 
 int i;
 void printMemoryUntil(Memory* memory, int value) {
+
 	if (value >= MAX_LENGTH) {
 		printf("Invalid input");
 		return;
@@ -13,14 +14,16 @@ void printMemoryUntil(Memory* memory, int value) {
 	}
 }
 
-void zero_bit_check(CpuStatus* cpu_status) {
+extern void set_flags_by_result(CpuStatus* cpu_status, uint16_t result) {
 
-    if (cpu_status->accu == 0) { 
-        cpu_status->zero_bit = 1; 
-    }
-    else { 
-        cpu_status->zero_bit = 0; 
-    }
+		if (result == 0) { 
+				cpu_status->zero_bit = 1; 
+		}
+		else { 
+				cpu_status->zero_bit = 0; 
+		}
+		cpu_status->carry_bit = (result & 0xff00) >> 8;
+		cpu_status->negation_bit = (result & 0x0080) >> 7;
 }
 
 void nop() {}
@@ -28,7 +31,7 @@ void nop() {}
 void load_value(CpuStatus* cpu_status, uint8_t value) {
     
     cpu_status->accu = value;
-    zero_bit_check(cpu_status);
+    set_flags_by_result(cpu_status, value);
 }
 
 void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address){
