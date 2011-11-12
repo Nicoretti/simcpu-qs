@@ -36,6 +36,10 @@ void load_value(CpuStatus* cpu_status, uint8_t value) {
 
 void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address){
 
+    uint16_t result = cpu_status->accu;
+    result += data_segment[address]; 
+    set_flags_by_result(cpu_status, result);
+    cpu_status->accu = (uint8_t) result;
     cpu_status->accu = data_segment[address];
     set_flags_by_result(cpu_status, data_segment[address]);
 }
@@ -57,18 +61,32 @@ void add_value(CpuStatus* cpu_status, uint8_t value) {
 
 void add_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
 
+    uint16_t result = cpu_status->accu;
+    result += data_segment[address]; 
+    set_flags_by_result(cpu_status, result);
+    cpu_status->accu = (uint8_t) result;
 }
 
 void sub_value(CpuStatus* cpu_status, uint8_t value) {
 
+    uint16_t result = cpu_status->accu;
+    result -= value; 
+    set_flags_by_result(cpu_status, result);
+    cpu_status->accu = (uint8_t) result;
 }
 
 void sub_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address) {
 
+    uint16_t result = cpu_status->accu;
+    result -= data_segment[address]; 
+    set_flags_by_result(cpu_status, result);
+    cpu_status->accu = (uint8_t) result;
 }
 
 void jump(CpuStatus* cpu_status, uint8_t value) {
-
+    
+    cpu_status->ips = value;
+    set_flags_by_result(cpu_status, cpu_status->accu);
 }
 
 void brz(CpuStatus* cpu_status, uint8_t value) {
@@ -84,5 +102,5 @@ void brn(CpuStatus* cpu_status, uint8_t value) {
 }
 
 void end(CpuStatus* cpu_status) {
-
+    exit(EXIT_SUCCESS);
 }
