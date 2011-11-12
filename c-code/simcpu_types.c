@@ -3,8 +3,6 @@
 
 int j;
 void printMemoryUntil(Memory* memory, int value) {
-    char** symtable = { "NOP", "LDA #n", "LDA (n)", "STA n", "ADD #n" , "ADD (n)"
-                        "SUB #n", "SUB (n)", "JMP n", "BRZ #n", "BRC #n", "BRN #", "END" };
 	if (value >= MAX_LENGTH) {
 		printf("Invalid input");
 		return;
@@ -122,6 +120,7 @@ void end(CpuStatus* cpu_status) {
 uint8_t is_jump_valid(CpuStatus* cpu_status, uint8_t offset) {
 
     uint8_t current_ip = cpu_status->ips;
-    uint8_t destination = current_ip + offset;
+    uint16_t destination = current_ip + offset;
+		//TODO
     return (destination < 256 && destination >= 0) ? 1 : 0;
 }

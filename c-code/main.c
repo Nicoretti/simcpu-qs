@@ -45,7 +45,7 @@ int main (int argc, const char * argv[])
 
 	fseek(fp, 0, SEEK_SET);
 
-	printf("Number of lines: %d\n", lines);
+	printf("Number of lines read: %d\n", lines);
 
 	for (i = 0; i < lines; i++) 
 	{
@@ -57,6 +57,13 @@ int main (int argc, const char * argv[])
 			//printf("Opcode %d; Value %d\n", opcode, value);
 			memory.text[i].opcode = opcode;
 			memory.text[i].param = value;
+	}
+	//
+	//Last command is not END
+	//TODO make as enum
+	if (!(0x0C == memory.text[i].opcode)){
+			memory.text[i + 1].opcode = 0x0C;
+			lines++;
 	}
 
 	if(!fclose(fp))
