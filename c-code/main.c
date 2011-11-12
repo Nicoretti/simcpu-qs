@@ -39,19 +39,19 @@ int main (int argc, const char * argv[])
 		}
 	}
 
+	fseek(fp, 0, SEEK_SET);
+
 	printf("Number of lines: %d\n", lines);
 
-	//for (i = 0; i < lines; i++) 
-	//{
+	for (i = 0; i < lines; i++) 
+	{
       fscanf(fp, "%d", &intline);
-			//printf("As String: %s\n", line);
-	    //sscanf(line, "%d", &intline);
 	    printf("As Integer %d\n", intline);
 			sample = (uint16_t) intline;
-			//opcode = (sample & 0xF0) >> 8;
-			//value = sample & 0x0F;
-			//printf("Opcode %d; Value %d\n", opcode, value);
-	//}
+			opcode = (sample & 0xFF00) >> 8;
+			value = sample & 0x00FF;
+			printf("Opcode %d; Value %d\n", opcode, value);
+	}
 
 	if(!fclose(fp))
 	{
