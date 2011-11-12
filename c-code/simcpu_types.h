@@ -7,30 +7,30 @@
 struct CpuStatus {
 
     // instruction pointer
-    uint8_t ips = 0;
-    uint8_t accu = 0;
+    uint8_t ips;
+    uint8_t accu;
     // status bits / flags ("psw")
-    uint8_t zero_bit  = 1;
-    uint8_t carry_bit = 0;
-    uint8_t negation_bit = 0;
+    uint8_t zero_bit;
+    uint8_t carry_bit;
+    uint8_t negation_bit;
 };
 
 struct TextSegment {
 
-    uint8_t opcode = 0;
-    uint8_t param  = 0;
-}
+    uint8_t opcode;
+    uint8_t param;
+};
 
 struct DataSegment {
 
     uint8_t value;
-}
+};
 
 struct Memory {
 
-    TextSegment text[256];
-    DataSegment data[256];
-}
+    struct TextSegment text[256];
+    struct DataSegment data[256];
+};
 
 /**
  * As expected nop = no operation => it does nothing.
@@ -42,9 +42,8 @@ void nop() {}
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will be loaded into the accumulator. 
  */
-void load_value(CpuStatus& cpu_status, uint8_t value) {
+void load_value(struct CpuStatus* cpu_status, uint8_t value) {
     
-    cpu_status.accu = value;
 }
 
 /*
@@ -53,9 +52,8 @@ void load_value(CpuStatus& cpu_status, uint8_t value) {
  * @param data_segemnt:
  * @param address: where the value can be found.
  */
-void load_value_by_address(CpuStatus& cpu_status, DataSegment& data_segment, uint8_t address) {
+void load_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
 
-    
 }
 
 /*
@@ -64,14 +62,19 @@ void load_value_by_address(CpuStatus& cpu_status, DataSegment& data_segment, uin
  * @param data_segemnt:
  * @param address: where the value shall be stored.
  */
-void store_value(CpuStatus& cpu_status, DataSegment& data_segment, uint8_t address);
+void store_value(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+
+}
 
 /**
  * Increases the value of the accumulator by the specified value. 
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will be added to the accumulator.
  */
-void add_value(CpuStatus& cpu_status, uint8_t value);
+void add_value(struct CpuStatus* cpu_status, uint8_t value) {
+    
+    
+}
 
 /**
  * Increases the value of the the accumulator by the value at the given memory address
@@ -79,14 +82,18 @@ void add_value(CpuStatus& cpu_status, uint8_t value);
  * @param data_segemnt:
  * @param address: where the value can be found which will be added to the accumulator.
  */
-void add_value_by_address(CpuStatus& cpu_status, DataSegment& data_segment, uint8_t address);
+void add_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+
+}
 
 /**
  * Decreases the value of the accumulator by the specified value.
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will subtracted from the accumulator.
  */
-void sub_value(CpuStatus& cpu_status, uint8_t value);
+void sub_value(struct CpuStatus* cpu_status, uint8_t value) {
+
+}
 
 /**
  * Decreases the value of the accumulator by the value at the specified memory address
@@ -94,39 +101,51 @@ void sub_value(CpuStatus& cpu_status, uint8_t value);
  * @param data_segemnt:
  * @param address: where the value can be found which will be subtracted from the accumulator.
  */
-void sub_value_by_address(CpuStatus& cpu_status, DataSegment& data_segment, uint8_t address);
+void sub_value_by_address(struct CpuStatus* cpu_status, struct DataSegment* data_segment, uint8_t address) {
+
+}
 
 /**
  * Loads the instruction pointer with the specified value.
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will be loaded into the instruction pointer.
  */
-void jump(CpuStatus& cpu_status, uint8_t value);
+void jump(struct CpuStatus* cpu_status, uint8_t value) {
+
+}
 
 /*
  * Adds the specified value to the instruction pointer if the ZERO-Falg is set
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will be added to the instruction pointer.
  */
-void brz(CpuStatus& cpu_status, uint8_t value);
+void brz(struct CpuStatus* cpu_status, uint8_t value) {
+
+}
 
 /*
  * Adds the specified value to the instruction pointer if the CARRY-Falg is set.
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will be added to the instruction pointer.
  */
-void brc(CpuStatus& cpu_status, uint8_t value);
+void brc(struct CpuStatus* cpu_status, uint8_t value) {
+
+}
 
 /*
  * Adds the specified value to the instruction pointer if the NEGATION-Fag is set.
  * @param cpu_status: of the cpu which is calling this operation.
  * @param value: which will be added to the instruction pointer.
  */
-void brz(CpuStatus& cpu_status, uint8_t value);
+void brn(struct CpuStatus* cpu_status, uint8_t value) {
+
+}
 
 /*
  * Not Specified yet.
  * @param cpu_status: of the cpu which is calling this operation.
  */
-void end(CpuStatus& cpu_status);
+void end(struct CpuStatus* cpu_status) {
+
+}
 #endif /* SIMCPU_TYPES_H */
