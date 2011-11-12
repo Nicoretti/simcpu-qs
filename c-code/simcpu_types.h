@@ -68,7 +68,6 @@ extern void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, 
  * @param data_segemnt:
  * @param address: where the value shall be stored.
  */
-<<<<<<< local
 extern void store_value(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address);
 
 /**
