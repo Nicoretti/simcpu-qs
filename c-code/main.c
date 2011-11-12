@@ -62,9 +62,11 @@ int main (int argc, const char * argv[])
 	//Last command is not END
 	//TODO make as enum
 	if (!(0x0C == memory.text[i].opcode)){
-			memory.text[i + 1].opcode = 0x0C;
+			memory.text[i].opcode = 0x0C;
 			lines++;
 	}
+
+	printMemoryUntil(&memory, 5);
 
 	if(!fclose(fp))
 	{
@@ -159,6 +161,8 @@ int main (int argc, const char * argv[])
                 }
                 break;
             case END:
+								printf("End\n");
+								end(&cpu_status);
                 break;
         }
     }
