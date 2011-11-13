@@ -10,12 +10,12 @@ int main (int argc, const char * argv[])
 	FILE *fp;
 	int c, i;
 	int lines = 0;
-    uint8_t opcode = 0;
+  uint8_t opcode = 0;
 	uint8_t value = 0;
 	uint16_t sample = 0;
 	int intline = 0;
-    CpuStatus cpu_status;
 
+  CpuStatus cpu_status;
 	Memory memory;
 
 	if (argc < 2)
@@ -45,6 +45,9 @@ int main (int argc, const char * argv[])
 
 	fseek(fp, 0, SEEK_SET);
 
+	// prepare memory
+  
+
 	printf("Number of lines read: %d\n", lines);
 
 	for (i = 0; i < lines; i++) 
@@ -61,7 +64,8 @@ int main (int argc, const char * argv[])
 	//
 	//Last command is not END
 	//TODO make as enum
-	if (!(0x0C == memory.text[i].opcode)){
+	if (!(0x0C == memory.text[i].opcode))
+	{
 			memory.text[i].opcode = 0x0C;
 			lines++;
 	}
