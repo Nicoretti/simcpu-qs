@@ -9,9 +9,11 @@
 
 static const char* symtable []= { 
 		"NOP", "LDA #n", "LDA (n)", "STA n", "ADD #n" , "ADD (n)"
-    "SUB #n", "SUB (n)", "JMP n", "BRZ #n", "BRC #n", "BRN #", "END" };
+    "SUB #n", "SUB (n)", "JMP n", "BRZ #n", "BRC #n", "BRN #", "END" 
+};
 
-enum {
+enum Opcodes{
+				// No operation
         NOP  = 0x00,
         // loads the accumulator with the specified value
         LDAV = 0x01,
@@ -29,11 +31,11 @@ enum {
         SUBA = 0x07,
         // loads the instruction pointer with the specified value
         JMP  = 0x08,
-        // adds the specified value to the instruction pointer if the ZERO-Falg is set
+        // adds the specified value to the instruction pointer if the ZERO-Flag is set
         BRZ  = 0x09,
-        // adds the specified value to the instruction pointer if the CARRY-Falg is set
+        // adds the specified value to the instruction pointer if the CARRY-Flag is set
         BRC  = 0x0A,
-        // adds the specified value to the instruction pointer if the NEGATION-Fag is set
+        // adds the specified value to the instruction pointer if the NEGATION-Flag is set
         BRN  = 0x0B,
         // indicates the end of the programm
         END  = 0x0C
@@ -66,7 +68,7 @@ typedef struct {
  * Outputs a debug message to stdout for the specified text segment.
  * @param text_segment: which will be used for the debug output.
  */
-void debug_output(TextSegment* text_segment);
+extern void debug_output(TextSegment* text_segment);
 
 /*
  * Prints the contents of the data segment.
