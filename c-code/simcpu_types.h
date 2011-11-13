@@ -8,8 +8,10 @@
 #define SIMCPU_TYPES_H
 
 static const char* symtable []= { 
-		"NOP", "LDA #n", "LDA (n)", "STA n", "ADD #n" , "ADD (n)"
-    "SUB #n", "SUB (n)", "JMP n", "BRZ #n", "BRC #n", "BRN #", "END" 
+		"NOP", "LDA #n", "LDA (n)", 
+		"STA n", "ADD #n" , "ADD (n)",
+    "SUB #n", "SUB (n)", "JMP n", 
+		"BRZ #n", "BRC #n", "BRN #", "END",
 };
 
 enum {
@@ -26,7 +28,7 @@ enum {
         // increases the value of the the accumulator by the value at the given memory address
         ADDA = 0x05,
         // decreases the value of the accumulator by the specified value
-        SUBV = 0x6,
+        SUBV = 0x06,
         // decreases the value of the accumulator by the value at the specified memory address
         SUBA = 0x07,
         // loads the instruction pointer with the specified value

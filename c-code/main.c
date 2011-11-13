@@ -66,7 +66,7 @@ int main (int argc, const char * argv[])
 	}
 
 	// Print memory
-  print_text_segment(&memory,0, 5);
+  print_text_segment(&memory,0, lines);
 
 	if(!fclose(fp))
 	{
