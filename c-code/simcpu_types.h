@@ -12,7 +12,7 @@ static const char* symtable []= {
     "SUB #n", "SUB (n)", "JMP n", "BRZ #n", "BRC #n", "BRN #", "END" 
 };
 
-enum Opcodes{
+enum {
 				// No operation
         NOP  = 0x00,
         // loads the accumulator with the specified value
@@ -39,7 +39,7 @@ enum Opcodes{
         BRN  = 0x0B,
         // indicates the end of the programm
         END  = 0x0C
-};
+} Opcodes;
 
 typedef struct {
 

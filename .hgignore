@@ -4,3 +4,4 @@ syntax: glob
 *.gcno
 *.swp
 simcpu
+.DS_Store

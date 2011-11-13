@@ -2,7 +2,7 @@
 
 void debug_output(TextSegment* text_segment) {
 
-    printf("Executing %s with param: %d\n", symtable[text_segment->opcode], text_segment->param);
+  printf("Executing %s\t with param: %d\n", symtable[text_segment->opcode], text_segment->param);
 }
 
 void print_data_segment(uint8_t* data_segment, uint8_t start, uint8_t end) {

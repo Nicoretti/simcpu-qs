@@ -45,6 +45,10 @@ int main (int argc, const char * argv[])
 	fseek(fp, 0, SEEK_SET);
 
 	// prepare memory
+	for (i = 0; i < MAX_LENGTH; i++)
+	{
+		memory.text[i].opcode = END;
+	}
   
 
 	printf("Number of lines read: %d\n", lines);
@@ -60,15 +64,9 @@ int main (int argc, const char * argv[])
 			memory.text[i].opcode = opcode;
 			memory.text[i].param = value;
 	}
-	//
-	//Last command is not END
-	//TODO make as enum
-	if (!(0x0C == memory.text[i].opcode))
-	{
-			memory.text[i].opcode = 0x0C;
-			lines++;
-	}
-    print_text_segment(&memory,0, 5);
+
+	// Print memory
+  print_text_segment(&memory,0, 5);
 
 	if(!fclose(fp))
 	{
