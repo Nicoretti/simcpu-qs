@@ -1,2 +1,6 @@
 LDA #2
 STA 1
+JMP 255
+LDA #0
+STA 3
+BRZ #4

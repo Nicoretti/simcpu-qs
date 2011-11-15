@@ -42,6 +42,7 @@ int main (int argc, const char * argv[])
 		}
 	}
 
+	// reset filepointer at the beginning
 	fseek(fp, 0, SEEK_SET);
 
 	// prepare memory
@@ -76,95 +77,97 @@ int main (int argc, const char * argv[])
 		printf("Inputfile is not closed correctly!\n");
 	}
 
-    cpu_status.ips = 0;
-    cpu_status.accu = 0;
-    set_flags_by_result(&cpu_status, cpu_status.accu);
+	cpu_status.ips = 0;
+	cpu_status.accu = 0;
+	set_flags_by_result(&cpu_status, cpu_status.accu);
 
-    while (1) {
-        // fetch
-        TextSegment text_seg = memory.text[cpu_status.ips];
-        debug_output(&text_seg);
-        // decode
-        switch (text_seg.opcode) 
-        {
-            // executes
-            case NOP:
-                nop();
-                cpu_status.ips += 1;
-                break;
-            case LDAV:
-                load_value(&cpu_status, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case LDAA:
-                load_value_by_address(&cpu_status, memory.data, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case STA:
-                store_value(&cpu_status, memory.data, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case ADDV:
-                add_value(&cpu_status, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case ADDA:
-                add_value_by_address(&cpu_status, memory.data, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case SUBV:
-                sub_value(&cpu_status, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case SUBA:
-                sub_value_by_address(&cpu_status, memory.data, text_seg.param);
-                cpu_status.ips += 1;
-                break;
-            case JMP:
-                if (is_jump_valid(&cpu_status, text_seg.param)) {
-                    jump(&cpu_status, text_seg.param);
-                }
-                else {
-                    printf("Invalid absolute jump.\n");
-                    printf("Exit\n");
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            case BRZ:
-                if (is_jump_valid(&cpu_status, text_seg.param)) {
-                    brz(&cpu_status, text_seg.param);
-                }
-                else {
-                    printf("Invalid BRZ.\n");
-                    printf("Exit\n");
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            case BRC:
-                if (is_jump_valid(&cpu_status, text_seg.param)) {
-                    brc(&cpu_status, text_seg.param);
-                }
-                else {
-                    printf("Invalid BRC\n");
-                    printf("Exit\n");
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            case BRN:
-                if (is_jump_valid(&cpu_status, text_seg.param)) {
-                    brn(&cpu_status, text_seg.param);
-                }
-                else {
-                    printf("Invalid BRN.\n");
-                    printf("Exit\n");
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            case END:
-								end(&cpu_status);
-                break;
-        }
-    }
+	while (1) {
+			// fetch
+			TextSegment text_seg = memory.text[cpu_status.ips];
+			debug_output(&text_seg);
+			// decode
+			switch (text_seg.opcode) 
+			{
+					// executes
+					case NOP:
+							nop();
+							cpu_status.ips += 1;
+							break;
+					case LDAV:
+							load_value(&cpu_status, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case LDAA:
+							load_value_by_address(&cpu_status, memory.data, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case STA:
+							store_value(&cpu_status, memory.data, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case ADDV:
+							add_value(&cpu_status, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case ADDA:
+							add_value_by_address(&cpu_status, memory.data, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case SUBV:
+							sub_value(&cpu_status, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case SUBA:
+							sub_value_by_address(&cpu_status, memory.data, text_seg.param);
+							cpu_status.ips += 1;
+							break;
+					case JMP:
+							//TODO
+							//not necessary because assembler.py already checks it
+							//if (is_jump_valid(&cpu_status, text_seg.param)) {
+									jump(&cpu_status, text_seg.param);
+							//}
+							//	else {
+							//			printf("Invalid absolute jump.\n");
+							//			printf("Exit\n");
+							//			exit(EXIT_FAILURE);
+							//	}
+							break;
+					case BRZ:
+							if (is_jump_valid(&cpu_status, text_seg.param)) {
+									brz(&cpu_status, text_seg.param);
+							}
+							else {
+									printf("Invalid BRZ.\n");
+									printf("Exit\n");
+									exit(EXIT_FAILURE);
+							}
+							break;
+					case BRC:
+							if (is_jump_valid(&cpu_status, text_seg.param)) {
+									brc(&cpu_status, text_seg.param);
+							}
+							else {
+									printf("Invalid BRC\n");
+									printf("Exit\n");
+									exit(EXIT_FAILURE);
+							}
+							break;
+					case BRN:
+							if (is_jump_valid(&cpu_status, text_seg.param)) {
+									brn(&cpu_status, text_seg.param);
+							}
+							else {
+									printf("Invalid BRN.\n");
+									printf("Exit\n");
+									exit(EXIT_FAILURE);
+							}
+							break;
+					case END:
+							end(&cpu_status);
+							break;
+			}
+	}
 
 	return 0;
 }

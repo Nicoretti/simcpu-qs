@@ -136,7 +136,8 @@ void end(CpuStatus* cpu_status) {
 uint8_t is_jump_valid(CpuStatus* cpu_status, uint8_t offset) {
 
     uint8_t current_ip = cpu_status->ips;
-    uint16_t destination = current_ip + offset;
+    uint8_t destination = current_ip + offset;
 		//TODO
-    return (destination < 256 && destination >= 0) ? 1 : 0;
+    printf("DEBUG: %d\n",((destination <= MAX_LENGTH) && (destination >= 0)));// ? 1 : 0;
+		return 0;
 }
