@@ -49,6 +49,7 @@ int main (int argc, const char * argv[])
 	for (i = 0; i < MAX_LENGTH; i++)
 	{
 		memory.text[i].opcode = END;
+		memory.data[i] = 0;
 	}
   
 
@@ -66,8 +67,8 @@ int main (int argc, const char * argv[])
 			memory.text[i].param = value;
 	}
 
-	// Print memory
-  print_text_segment(&memory,0, lines);
+	// Print opcode and params
+  //print_text_segment(&memory,0, lines);
 
 	if(!fclose(fp))
 	{
@@ -122,16 +123,7 @@ int main (int argc, const char * argv[])
 							cpu_status.ips += 1;
 							break;
 					case JMP:
-							//TODO
-							//not necessary because assembler.py already checks it
-							//if (is_jump_valid(&cpu_status, text_seg.param)) {
-									jump(&cpu_status, text_seg.param);
-							//}
-							//	else {
-							//			printf("Invalid absolute jump.\n");
-							//			printf("Exit\n");
-							//			exit(EXIT_FAILURE);
-							//	}
+							jump(&cpu_status, text_seg.param);
 							break;
 					case BRZ:
 							if (is_jump_valid(&cpu_status, text_seg.param)) {
@@ -164,6 +156,8 @@ int main (int argc, const char * argv[])
 							}
 							break;
 					case END:
+							// print memory
+ 							print_data_segment(memory.data, 0, 10);
 							end(&cpu_status);
 							break;
 			}

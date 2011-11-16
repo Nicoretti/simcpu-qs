@@ -87,6 +87,10 @@ extern void print_data_segment(uint8_t* data_segment, uint8_t start, uint8_t end
 extern void print_text_segment(Memory* memory, uint8_t start, uint8_t end);
 
 /**
+ * Prints the current flags
+ */
+extern void print_flags(CpuStatus* cpu_status);
+/**
  * Checks the result and sets the flags (carry, zero, negation) appropriate.
  */
 extern void set_flags_by_result(CpuStatus* cpu_status, uint16_t result);

@@ -29,6 +29,11 @@ void print_text_segment(Memory* memory, uint8_t start, uint8_t end) {
     }
 }
 
+void print_flags(CpuStatus* cpu_status) {
+	printf("PSW: Zero-bit: %d | Carry-bit: %d | Negation-bit: %d\n", 
+				 cpu_status->zero_bit, cpu_status->carry_bit, cpu_status->negation_bit);
+}
+
 void set_flags_by_result(CpuStatus* cpu_status, uint16_t result) {
 
 		if (result == 0) { 
@@ -39,6 +44,7 @@ void set_flags_by_result(CpuStatus* cpu_status, uint16_t result) {
 		}
 		cpu_status->carry_bit = (result & 0xff00) >> 8;
 		cpu_status->negation_bit = (result & 0x0080) >> 7;
+		print_flags(cpu_status);
 }
 
 void nop() {}
@@ -51,10 +57,6 @@ void load_value(CpuStatus* cpu_status, uint8_t value) {
 
 void load_value_by_address(CpuStatus* cpu_status, uint8_t* data_segment, uint8_t address){
 
-    uint16_t result = cpu_status->accu;
-    result += data_segment[address]; 
-    set_flags_by_result(cpu_status, result);
-    cpu_status->accu = (uint8_t) result;
     cpu_status->accu = data_segment[address];
     set_flags_by_result(cpu_status, data_segment[address]);
 }

@@ -5,3 +5,5 @@ syntax: glob
 *.swp
 simcpu
 .DS_Store
+inputToSimulate.txt
+input.txt
