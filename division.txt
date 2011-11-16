@@ -1,0 +1,14 @@
+LDA #17
+STA 0
+LDA #4
+STA 1
+LDA (0)
+STA 2
+LDA (2)
+SUB (1)
+STA 2
+BRN #5
+LDA #1
+ADD (3)
+STA 3
+JMP 6 
