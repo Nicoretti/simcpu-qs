@@ -54,9 +54,9 @@ INSTRUCTION_MAPPING = {
                            SUBV: re.compile("SUB #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
                            SUBA: re.compile("SUB \([0-9]{1,3}\)$"),
                            JMP:  re.compile("JMP [0-9]{1,3}$"),
-                           BRZ:  re.compile("BRZ #[0-9]{1,3}$"),
-                           BRC:  re.compile("BRC #[0-9]{1,3}$"),
-                           BRN:  re.compile("BRN #[0-9]{1,3}$"),
+                           BRZ:  re.compile("BRZ #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
+                           BRC:  re.compile("BRC #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
+                           BRN:  re.compile("BRN #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
                            END:  re.compile("END$")
                        }
 # mapping opcode instruction string

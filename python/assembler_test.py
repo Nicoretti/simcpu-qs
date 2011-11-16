@@ -69,24 +69,29 @@ class Test(unittest.TestCase):
 
 # Tests LDAA -------------------------------------------
 
-    def test_lda_adr_fail(self):
+    def test_lda_adr_fail1(self):
         instr_line = "LDA (-1)"
         expected = None
         actual = self.asm.get_instruction(instr_line)
         self.assertEqual(expected, actual)
 
-    def test_lda_val_positive(self):
+    def test_lda_adr_fail2(self):
+        instr_line = "LDAd (1)"
+        expected = None
+        actual = self.asm.get_instruction(instr_line)
+        self.assertEqual(expected, actual)
+
+    def test_lda_adr_positive(self):
         instr_line = "LDA (10)"
         expected = LDAA
         actual = self.asm.get_instruction(instr_line)
         self.assertEqual(expected, actual)
 
-    def test_lda_val_positive_fail1(self):
+    def test_lda_adr_positive_fail1(self):
         instr_line = "LDA (2333)"
         expected = None
         actual = self.asm.get_instruction(instr_line)
         self.assertEqual(expected, actual)
-
 
 
 
