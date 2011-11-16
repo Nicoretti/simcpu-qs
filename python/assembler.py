@@ -238,7 +238,7 @@ if __name__ == "__main__":
                             help="a file with assembler instructions")
     arg_parser.add_argument("-o", metavar="out-file", dest="out_file",
                             help="file to which the compiled output will be written")
-    arg_parser.add_argument("-m", dest="mappings", nargs="?", const=True,
+    arg_parser.add_argument("-m", dest="mappings", action="store_true", default=True,
                             help="show out the instruction mappings")
   
     if len(sys.argv) == 1:
