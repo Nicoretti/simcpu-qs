@@ -46,12 +46,12 @@ INSTRUCTIONS = [NOP, LDAV, LDAA, STA, ADDV, ADDA,
 # Default-Mapping
 INSTRUCTION_MAPPING = {
                            NOP:  re.compile("NOP$"),
-                           LDAV: re.compile("LDA #[0-9]{1,3}$"),
+                           LDAV: re.compile("LDA #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
                            LDAA: re.compile("LDA \([0-9]{1,3}\)$"),
                            STA:  re.compile("STA [0-9]{1,3}$"),
-                           ADDV: re.compile("ADD #[0-9]{1,3}$"),
+                           ADDV: re.compile("ADD #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
                            ADDA: re.compile("ADD \([0-9]{1,3}\)$"),
-                           SUBV: re.compile("SUB #[0-9]{1,3}$"),
+                           SUBV: re.compile("SUB #(([0-9]{1,3})|(-[0-9]{1,3}))$"),
                            SUBA: re.compile("SUB \([0-9]{1,3}\)$"),
                            JMP:  re.compile("JMP [0-9]{1,3}$"),
                            BRZ:  re.compile("BRZ #[0-9]{1,3}$"),
@@ -138,9 +138,9 @@ class Assembler(object):
         @raise ValueError:  If the value it isn't  contained in [0, 255].
         """
         value = int(digit_str)
-        if value >= 0 and value <= 255: return value
+        if (value >= 0 and value <= 255) or (value >= -128 and value <= 127): return value
         else:
-            err_msg = "ValueError: In line {0} a value != [0,255] was used."
+            err_msg = "ValueError: In line {0} a value != [0,255] or value != [-128, 127] was used."
             raise ValueError(err_msg.format(self._line_no))
     
         
@@ -154,11 +154,12 @@ class Assembler(object):
         if instruction == NOP or instruction == END:
             parameter = 0
         else:
-            results = re.findall("[0-9]{1,3}", line)
+            results = re.findall("(([0-9]{1,3})|(-[0-9]{1,3}))", line)
             if len(results) == 1:
-                digit_str = results[0]
-                if digit_str.isdigit():
+                digit_str = results[0][0]
+                if digit_str.isdigit() or digit_str[1:].isdigit():
                     parameter = self.get_value(digit_str)
+                    if parameter < 0: parameter = 256 + parameter
                 else:
                     err_msg = "SyntaxError, line {0}: Parameter isn't a int value"
                     raise Exception(err_msg.format(self._line_no))
