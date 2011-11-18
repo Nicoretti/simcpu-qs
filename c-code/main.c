@@ -154,7 +154,6 @@ int main (int argc, const char * argv[])
 							break;
 					case END:
 							end(&cpu_status);
-							break;
 			}
  	print_data_segment(memory.data, 0, 4);
 	}

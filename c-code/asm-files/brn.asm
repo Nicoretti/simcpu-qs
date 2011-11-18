@@ -1,0 +1,6 @@
+NOP
+LDA #255
+BRN #2
+NOP
+NOP
+NOP
