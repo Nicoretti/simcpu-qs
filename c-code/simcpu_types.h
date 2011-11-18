@@ -7,7 +7,7 @@
 #ifndef SIMCPU_TYPES_H
 #define SIMCPU_TYPES_H
 
-static const char* symtable []= { 
+const char* symtable []= { 
 		"NOP", "LDA #n", "LDA (n)", 
 		"STA n", "ADD #n" , "ADD (n)",
     "SUB #n", "SUB (n)", "JMP n", 

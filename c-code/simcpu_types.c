@@ -154,6 +154,6 @@ void end(CpuStatus* cpu_status) {
 
 uint8_t is_jump_valid(CpuStatus* cpu_status, uint8_t offset) {
 
-    uint16_t destination = cpu_status->ips + (char) offset;
+    unsigned int destination = cpu_status->ips + (char) offset;
 		return (destination >=0 && destination < MAX_LENGTH) ? 1 : 0;
 }
