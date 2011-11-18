@@ -1,0 +1,9 @@
+syntax: glob
+*.o
+*.gcda
+*.gcno
+*.swp
+simcpu
+.DS_Store
+inputToSimulate.txt
+input.txt
