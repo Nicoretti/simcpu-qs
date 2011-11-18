@@ -8,6 +8,16 @@ static const char* symtable []= {
 		"END"
 };
 
+/**
+ * Prints the current flags
+ */
+static void print_flags(CpuStatus* cpu_status);
+/**
+ * Checks the result and sets the flags (carry, zero, negation) appropriate.
+ */
+static void set_flags_by_result(CpuStatus* cpu_status, uint16_t result);
+
+
 void debug_output(TextSegment* text_segment) {
 
   printf("Exec %s\t with param: %u\n", symtable[text_segment->opcode], (unsigned int) text_segment->param);
@@ -42,14 +52,14 @@ void print_text_segment(Memory* memory, uint8_t start, uint8_t end) {
     }
 }
 
-void print_flags(CpuStatus* cpu_status) {
+static void print_flags(CpuStatus* cpu_status) {
 	printf("PSW: Zero-bit: %u | Carry-bit: %u | Negation-bit: %u\n", 
 				 (unsigned int) cpu_status->zero_bit, 
 				 (unsigned int) cpu_status->carry_bit, 
 				 (unsigned int) cpu_status->negation_bit);
 }
 
-void set_flags_by_result(CpuStatus* cpu_status, uint16_t result) {
+static void set_flags_by_result(CpuStatus* cpu_status, uint16_t result) {
 
 		if (result == 0) { 
 				cpu_status->zero_bit = 1; 
