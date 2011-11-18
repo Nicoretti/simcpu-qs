@@ -153,9 +153,10 @@ int main (int argc, const char * argv[])
 							}
 							break;
 					case END:
+							print_data_segment(memory.data, 0, 4);
+							print_text_segment(&memory, 0, 10);
 							end(&cpu_status);
 			}
- 	print_data_segment(memory.data, 0, 4);
 	}
 
 	return 0;
