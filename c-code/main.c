@@ -160,7 +160,7 @@ int main (int argc, const char * argv[])
 							end(&cpu_status);
 							break;
 			}
- 			print_data_segment(memory.data, 0, 4);
+ 			print_data_segment(memory.data, 0, 42);
 	}
 
 	return 0;
