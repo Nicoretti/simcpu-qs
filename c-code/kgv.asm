@@ -1,6 +1,6 @@
-LDA #4
+LDA #2
 STA 1
-LDA #3
+LDA #2
 STA 2
 LDA (1)  	  
 STA 12
