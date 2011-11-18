@@ -10,4 +10,4 @@ simcpu:	simcpu_types.o main.o
 	gcc -o simcpu -Wall -ggdb -fprofile-arcs -ftest-coverage main.o simcpu_types.o
 	
 clean:
-	rm -f simcpu *.o *.gcno *.gcda *.gcov
+	rm -f simcpu *.o *.gcno *.gcda *.gcov *.log

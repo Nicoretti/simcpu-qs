@@ -1,7 +1,8 @@
 #!/bin/sh
+# ATTENTION: This script is currently not in use
+#
+# TODO: Variables, Consoleinput, check for build if simcpu doesn't exist
 
-#TODO
-#Variables, Consoleinput, check for build if simcpu doesn't exist
 if  [ $# -gt 1 ]; then
   echo "Too many arguments. Only one inputfile is allowed!"
 	exit 1;
