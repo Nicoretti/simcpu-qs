@@ -1,0 +1,6 @@
+NOP
+LDA #0
+BRZ #2
+NOP
+NOP
+NOP

@@ -1,0 +1,12 @@
+LDA #4
+STA 0
+LDA #3
+STA 1
+LDA (0)
+BRZ #7
+SUB #1
+STA 0
+LDA (1)
+ADD (2)
+STA 2
+JMP 4
